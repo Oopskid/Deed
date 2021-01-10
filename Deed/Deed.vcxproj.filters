@@ -19,6 +19,12 @@
     <Filter Include="Header Files\Maths\Functions">
       <UniqueIdentifier>{1a3f6d81-62f8-49ca-a628-c30f4f69e2d4}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Collision">
+      <UniqueIdentifier>{2bd0b090-8a94-4533-9317-29a68a1367b7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Physics">
+      <UniqueIdentifier>{235ffce5-bf3e-405c-883a-816c198dd362}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
@@ -35,6 +41,12 @@
     </ClInclude>
     <ClInclude Include="LineM.h">
       <Filter>Header Files\Maths\Functions</Filter>
+    </ClInclude>
+    <ClInclude Include="Bounds.h">
+      <Filter>Header Files\Collision</Filter>
+    </ClInclude>
+    <ClInclude Include="AABB.h">
+      <Filter>Header Files\Collision</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

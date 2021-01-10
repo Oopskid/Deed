@@ -12,7 +12,6 @@
 #define Vector3d Vector<double, 3>
 
 //A column vector in the mathematical sense
-//Size must be >= 1 else undefined behaviour
 template<typename T, size_t Size> class Vector
 {
 	public:
