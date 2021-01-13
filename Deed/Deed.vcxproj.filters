@@ -54,14 +54,14 @@
     <ClInclude Include="Kinetic.h">
       <Filter>Header Files\Physics</Filter>
     </ClInclude>
-    <ClInclude Include="RKinetic.h">
-      <Filter>Header Files\Physics</Filter>
-    </ClInclude>
     <ClInclude Include="Ray.h">
       <Filter>Header Files\Physics</Filter>
     </ClInclude>
     <ClInclude Include="Traceable.h">
       <Filter>Header Files\Physics</Filter>
+    </ClInclude>
+    <ClInclude Include="Circle.h">
+      <Filter>Header Files\Collision</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

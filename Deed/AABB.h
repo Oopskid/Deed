@@ -12,6 +12,17 @@ template<typename T, size_t Dims> class AABB
 	AABB() { pos = Vector(); range = Vector(); }
 	AABB(const Vector position, const Vector size) { pos = position; range = size; }
 
+	//Returns whether two AABB overlap
+	static bool overlaps(const AABB& first, const AABB& second)
+	{
+		//Check each dimension
+		for (size_t i = 0; i < Dims; i++)
+		{
+			if (!overlaps(std::make_pair(first.pos[i], first.pos[i] + first.range[i]), std::make_pair(second.pos, second.pos + second.range))) { return false; } //Return prematurely
+		}
+		return true;
+	}
+
 	//Return overlap area
 	AABB operator-(const AABB& other) const
 	{
@@ -47,14 +58,12 @@ template<typename T, size_t Dims> class AABB
 
 	void translate(const Vector& amount)
 	{
-		pos = pos + amount;
+		pos += amount;
 	}
 
 	Vector getPosition() const { return pos; }
-
-	Vector setPosition(Vector newPosition) { pos = newPosition; }
-
-	void setSize(Vector newSize) { range = newSize; }
+	Vector setPosition(const Vector newPosition) { pos = newPosition; }
+	void setSize(const Vector newSize) { range = newSize; }
 
 	private:
 	Vector pos;

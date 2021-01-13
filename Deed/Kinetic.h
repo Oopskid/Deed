@@ -1,11 +1,8 @@
 #pragma once
 
 //Generic kinematics (physics) base
-template<typename T, size_t Dims> class Kinetic
+template<typename T> class Kinetic
 {
 	public:
-
-	protected:
-
-	private:
+	virtual void motion(T timelapse) = 0;
 };
