@@ -154,10 +154,15 @@
   <ItemGroup>
     <ClInclude Include="AABB.h" />
     <ClInclude Include="Bounds.h" />
+    <ClInclude Include="Box.h" />
     <ClInclude Include="framework.h" />
+    <ClInclude Include="Kinetic.h" />
     <ClInclude Include="LineM.h" />
     <ClInclude Include="Matrix.h" />
     <ClInclude Include="pch.h" />
+    <ClInclude Include="Ray.h" />
+    <ClInclude Include="RKinetic.h" />
+    <ClInclude Include="Traceable.h" />
     <ClInclude Include="Vector.h" />
   </ItemGroup>
   <ItemGroup>

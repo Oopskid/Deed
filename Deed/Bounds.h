@@ -27,4 +27,13 @@ namespace Bounds
 			firstR.second < secondR.second ? firstR.second : secondR.second //The min of the max
 		);
 	}
+
+	//Returns the minimum range which includes two ranges
+	template<typename T> std::pair<T, T> include(std::pair<T, T> firstR, std::pair<T, T> secondR)
+	{
+		return std::make_pair(
+			firstR.first < secondR.first ? firstR.first : secondR.first, //The min of the mins
+			firstR.second > secondR.second ? firstR.second : secondR.second //The max of the maxs
+		);
+	}
 }
