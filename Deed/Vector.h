@@ -2,23 +2,14 @@
 
 #include <array>
 
-//Common vector types
-#define Vector2i Vector<int, 2>
-#define Vector2f Vector<float, 2>
-#define Vector2d Vector<double, 2>
-
-#define Vector3i Vector<int, 3>
-#define Vector3f Vector<float, 3>
-#define Vector3d Vector<double, 3>
-
 //A column vector in the mathematical sense
 template<typename T, size_t Size> class Vector
 {
 	public:
 	//Declaration of a vector without values set
-	Vector() {  }
+	Vector() : ar() {  }
 	//Initialise a vector with a single value
-	Vector(const T initialiser) { ar = { initialiser }; }
+	Vector(const T initialiser) { ar.fill(initialiser); }
 	//Initialise a vector with an array
 	Vector(std::array<T, Size> const args) : ar(args) {  }
 
@@ -30,6 +21,12 @@ template<typename T, size_t Size> class Vector
 	const T& operator[](size_t index) const
 	{
 		return ar[index];
+	}
+
+	Vector& operator=(const Vector& other)
+	{
+		ar = other.ar;
+		return *this;
 	}
 
 	Vector operator+(const Vector& other) const
@@ -59,6 +56,17 @@ template<typename T, size_t Size> class Vector
 		for (size_t i = 0; i < Size; i++) { result[i] = ar[i] / divisor; }
 		return result;
 	}
+	
+	Vector<T, Size + 1> getHomogeneous(const T append) const
+	{  
+		std::array<T, Size + 1> newAr;
+		for (size_t i = 0; i < Size; i++) { newAr[i] = ar[i]; } //Copy
+		newAr[Size] = append; //The extra on the end
+		return Vector<T, Size + 1>(newAr);
+	}
+
+	T const* getData() const { return ar.data(); }
+	T* getData() { return ar.data(); }
 
 	void scale(const T multiplier)
 	{
@@ -81,7 +89,21 @@ template<typename T, size_t Size> class Vector
 
 };
 
+//Common vector types
+typedef Vector<int, 2> Vector2i;
+typedef Vector<float, 2> Vector2f;
+typedef Vector<double, 2> Vector2d;
+
+typedef Vector<int, 3> Vector3i;
+typedef Vector<float, 3> Vector3f;
+typedef Vector<double, 3> Vector3d;
+
+typedef Vector<int, 4> Vector4i;
+typedef Vector<float, 4> Vector4f;
+typedef Vector<double, 4> Vector4d;
+
 //Common vector size constructions
-template<typename T> Vector<T, 1> makeVector(T x) { return Vector<T, 1>(std::array<T, 1> { x }); }
-template<typename T> Vector<T, 2> makeVector(T x, T y) { return Vector<T, 2>(std::array<T, 2> { x, y }); }
-template<typename T> Vector<T, 3> makeVector(T x, T y, T z) { return Vector<T, 3>(std::array<T, 3> { x, y, z }); }
+template<typename T> Vector<T, 1> makeVector(const T x) { return Vector<T, 1>(std::array<T, 1> { x }); }
+template<typename T> Vector<T, 2> makeVector(const T x, const T y) { return Vector<T, 2>(std::array<T, 2> { x, y }); }
+template<typename T> Vector<T, 3> makeVector(const T x, const T y, const T z) { return Vector<T, 3>(std::array<T, 3> { x, y, z }); }
+template<typename T> Vector<T, 4> makeVector(const T x, const T y, const T z, const T w) { return Vector<T, 4>(std::array<T, 4> { x, y, z, w }); }

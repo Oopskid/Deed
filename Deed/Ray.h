@@ -8,7 +8,7 @@ template<typename T, size_t Dims> class Ray
 
 	public:
 
-	Vector getHit(const T& t)
+	Vector getHit(const double& t)
 	{
 		return start + direction * t;
 	}

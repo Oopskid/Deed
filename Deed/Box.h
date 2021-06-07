@@ -9,7 +9,7 @@ public AABB<T, Dims>, public Kinetic<T>
 	typedef Vector<T, Dims> Vector;
 
 	public:
-	static bool collision(T& result, const Box& first, const Box& second)
+	static bool collision(double& result, const Box* first, const Box* second)
 	{
 
 	}

@@ -15,8 +15,10 @@ template<typename T, size_t nRows, size_t nColumns> class Matrix
 	Matrix() { elements = baseV(); }
 	//Initialise a matrix with a single value
 	Matrix(const T initialiser) { elements = baseV(initialiser); }
+	//Initialise the matrix with a vector
+	Matrix(const Vector<T, nRows* nColumns> vec) : elements(vec) {  }
 	//Initialise the matrix with an array
-	Matrix(std::array<T, nRows* nColumns> const args) { elements = baseV(args); }
+	Matrix(const std::array<T, nRows* nColumns>& args) { elements = baseV(args); }
 
 	T& operator[](size_t linearI)
 	{
@@ -72,6 +74,11 @@ template<typename T, size_t nRows, size_t nColumns> class Matrix
 	{
 		elements.scale(multiplier);
 	}
+
+	baseV& asVector() { return elements; }
+	const baseV& asVector() const { return elements; }
+
+	T const* getData() const { return elements.getData(); }
 
 	private:
 	baseV elements;

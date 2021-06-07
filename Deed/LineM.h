@@ -6,6 +6,16 @@
 //Linear algebra
 namespace LineM
 {
+	template<typename T, size_t Size> Matrix<T, 1, Size> asRow(const Vector<T, Size> vec)
+	{
+		return Matrix<T, 1, Size>(vec);
+	}
+
+	template<typename T, size_t Size> Matrix<T, Size, 1> asColumn(const Vector<T, Size> vec)
+	{
+		return Matrix<T, Size, 1>(vec);
+	}
+
 	//Returns an identity matrix multiplied by some constant
 	template<typename T, size_t Size> Matrix<T, Size, Size> identity(T multiplier)
 	{
@@ -22,16 +32,19 @@ namespace LineM
 		return result;
 	}
 
+	//Determinant from values
 	template<typename T> T det2x2(T a1, T a2, T b1, T b2)
 	{
 		return (a1 * b2) - (a2 * b1);
 	}
 
+	//Determinant of a 2x2
 	template<typename T> T det2x2(const Matrix<T, 2, 2>& mat)
 	{
 		return det2x2(mat[0], mat[1], mat[2], mat[3]);
 	}
 
+	//Determinant of a 3x3
 	template<typename T> T det3x3(const Matrix<T, 3, 3>& mat)
 	{
 		T result = det2x2(mat[4], mat[5], mat[7], mat[8]) * mat[0]; //i
@@ -40,6 +53,7 @@ namespace LineM
 		return result;
 	}
 
+	//Cross product of two vectors
 	template<typename T> Vector<T, 3> cross(const Vector<T, 3>& first, const Vector<T, 3>& second)
 	{
 		Vector<T, 3> result;
@@ -51,6 +65,7 @@ namespace LineM
 		return result;
 	}
 
+	//Multiply two matrices
 	template<typename T, size_t rowN, size_t columnN, size_t other> Matrix<T, rowN, columnN> multiply(const Matrix<T, rowN, other>& first, const Matrix<T, other, columnN>& second)
 	{
 		Matrix<T, rowN, columnN> result;
@@ -78,6 +93,38 @@ namespace LineM
 		}
 
 		return result;
+	}
+
+	//Multiply a matrix and vector
+	template<typename T, size_t rowN, size_t columnN> Vector<T, rowN> multiply(const Matrix<T, rowN, columnN>& first, const Vector<T, columnN>& second)
+	{
+		return (multiply(first, asColumn(second))).asVector();
+	}
+
+	//Multiply a matrix and vector
+	template<typename T, size_t rowN, size_t columnN> Vector<T, columnN> multiply(const Vector<T, rowN>& first, const Matrix<T, rowN, columnN>& second)
+	{
+		return (multiply(asRow(first), second)).asVector();
+	}
+
+
+
+	//Premultiply translation
+	template<typename T, size_t squareSize> void translate(Matrix<T, squareSize, squareSize>& matrix, Vector<T, squareSize - 1> translation)
+	{
+		size_t vecSize = squareSize - 1;
+
+		size_t elemLoc = vecSize * squareSize;
+		for (size_t i = 0; i < vecSize; i++)
+		{
+			size_t multElm = i;
+			for (size_t i2 = 0; i2 < vecSize; i2++) 
+			{
+				matrix[elemLoc] += matrix[multElm] * translation[i2]; 
+				multElm += squareSize;
+			}
+			elemLoc++; //Next matrix element
+		}
 	}
 
 }
