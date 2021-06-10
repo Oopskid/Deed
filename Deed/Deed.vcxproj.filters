@@ -31,6 +31,9 @@
     <Filter Include="Source Files\Maths">
       <UniqueIdentifier>{91450b16-d031-45a7-958c-a20e501c0e0d}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Collision\Kinetic">
+      <UniqueIdentifier>{2cf28e5f-7a49-45df-bc8a-5f363b0f5345}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
@@ -86,6 +89,12 @@
     </ClInclude>
     <ClInclude Include="Arithmetic.h">
       <Filter>Header Files\Maths</Filter>
+    </ClInclude>
+    <ClInclude Include="Ball.h">
+      <Filter>Header Files\Collision\Kinetic</Filter>
+    </ClInclude>
+    <ClInclude Include="CPair.h">
+      <Filter>Header Files\Collision</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

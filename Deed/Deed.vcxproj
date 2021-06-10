@@ -155,10 +155,12 @@
   <ItemGroup>
     <ClInclude Include="AABB.h" />
     <ClInclude Include="Arithmetic.h" />
+    <ClInclude Include="Ball.h" />
     <ClInclude Include="Bounds.h" />
     <ClInclude Include="Box.h" />
     <ClInclude Include="Circle.h" />
     <ClInclude Include="CollisionSystem.h" />
+    <ClInclude Include="CPair.h" />
     <ClInclude Include="Mesh.h" />
     <ClInclude Include="Quaternion.h" />
     <ClInclude Include="Shape.h" />
