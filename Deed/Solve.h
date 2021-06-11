@@ -17,4 +17,10 @@ namespace Solve
 		a *= 2; //Slight optimisation for 2a
 		return { -(b + det) / a, (det - b) / a };
 	}
+
+	template<typename T> T triangular(T n)
+	{
+		return (n * n + n) / 2;
+	}
+	
 }

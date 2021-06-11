@@ -34,6 +34,9 @@
     <Filter Include="Header Files\Collision\Kinetic">
       <UniqueIdentifier>{2cf28e5f-7a49-45df-bc8a-5f363b0f5345}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Maths\Functions">
+      <UniqueIdentifier>{94f645f0-5a13-4fa4-a905-18093330ddba}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
@@ -106,6 +109,9 @@
     </ClCompile>
     <ClCompile Include="Arithmetic.cpp">
       <Filter>Source Files\Maths</Filter>
+    </ClCompile>
+    <ClCompile Include="Solve.cpp">
+      <Filter>Source Files\Maths\Functions</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
