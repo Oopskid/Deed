@@ -12,8 +12,8 @@ namespace Collision
 {
 	template<typename T, typename Obj, typename Manager, typename ColPair> class SimpleSystem
 	{
-		static_assert(std::is_base_of<Kinetic<T>, Obj>);
-		static_assert(std::is_base_of<Pair<Obj, Obj, Manager, T>, ColPair>);
+		//static_assert(std::is_base_of<Kinetic<T>, Obj>);
+		//static_assert(std::is_base_of<Pair<Obj, Obj, Manager, T>, ColPair>);
 
 		public:
 		SimpleSystem()
@@ -30,11 +30,11 @@ namespace Collision
 
 			while (events.size() > 0)
 			{
-				auto& it = events.begin();
+				auto it = events.begin();
 				size_t first;
 				size_t second;
 
-				getPair(it.second.second, first, second);
+				getPair(it->second.second, first, second);
 				Obj* firstObj = collidables[first];
 				Obj* secondObj = collidables[second];
 
@@ -67,7 +67,7 @@ namespace Collision
 					{
 						if (thisTime <= time)
 						{
-							events.insert(std::make_pair(thisTime, it.second));
+							events.insert(std::make_pair(thisTime, it->second));
 						}
 					}
 				}
@@ -86,6 +86,19 @@ namespace Collision
 			pairMapping.insert(pairMapping.end(), std::make_pair(pairs, collidables.size())); //Map this pair ID to first obj
 		}
 
+		Obj* removeEnd()
+		{
+			Obj* old = collidables.back();
+			collidables.pop_back();
+
+			pairs -= collidables.size();
+		}
+
+		void prepare(size_t requiredObjs)
+		{
+			collidables.reserve(requiredObjs);
+		}
+
 		void clear()
 		{
 			pairs = 0;
@@ -102,13 +115,13 @@ namespace Collision
 			for (size_t xObj = 1; xObj < collidables.size(); xObj++)
 			{
 				Obj* first = collidables[xObj];
-				for (size_t yobj = 0; yObj < xObj; yObj++)
+				for (size_t yObj = 0; yObj < xObj; yObj++)
 				{
 					Obj* second = collidables[yObj];
 
 					considerCollision(time, first, second, curId, events);
 
-					curid++; //Next pair
+					curId++; //Next pair
 				}
 			}
 		}
@@ -171,16 +184,16 @@ namespace Collision
 		//Gets the objs associated with a pair ID
 		void getPair(size_t id, size_t& first, size_t& second)
 		{
-			auto& it = pairMapping.lower_bound(id);
+			auto it = pairMapping.lower_bound(id);
 			
 			//Imagine a coordinate system of an (n-1)x(n-1) triangle, where the id is the 1-d index
 			first = it->second;
 			second = id - it->first;
 		}
 
-		inline Pair<Obj, Obj, Manager, T>& asPair(Colpair& pair)
+		inline Collision::Pair<Obj, Obj, Manager, T>& asPair(ColPair& pair)
 		{
-			return static_cast<Pair<Obj, Obj, Manager, T>>(pair);
+			return *reinterpret_cast<Pair<Obj, Obj, Manager, T>*>(&pair);
 		}
 
 		ColPair rules;
