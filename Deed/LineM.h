@@ -110,9 +110,9 @@ namespace LineM
 
 
 	//Premultiply translation
-	template<typename T, size_t squareSize> void translate(Matrix<T, squareSize, squareSize>& matrix, Vector<T, squareSize - 1> translation)
+	template<typename T, size_t squareSize> void translate(Vector<T, squareSize - 1> translation, Matrix<T, squareSize, squareSize>& matrix)
 	{
-		size_t vecSize = squareSize - 1;
+		const size_t vecSize = squareSize - 1;
 
 		size_t elemLoc = vecSize * squareSize;
 		for (size_t i = 0; i < vecSize; i++)
@@ -127,5 +127,24 @@ namespace LineM
 		}
 	}
 
+	//Postmultiply translation
+	template<typename T, size_t squareSize> void translate(Matrix<T, squareSize, squareSize>& matrix, Vector<T, squareSize - 1> translation)
+	{
+		const size_t vecSize = squareSize - 1;
+
+		size_t elemLoc = 0;
+		
+		for (size_t i = 0; i < squareSize; i++)
+		{
+			size_t multElm = elemLoc + vecSize;
+			for (size_t i2 = 0; i2 < vecSize; i2++)
+			{
+				matrix[elemLoc] += matrix[multElm] * translation[i2];
+				elemLoc++;
+			}
+
+			elemLoc++;
+		}
+	}
 }
 
