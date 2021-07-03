@@ -1,5 +1,7 @@
 #pragma once
 
+#include <vector>
+
 #include "Vector.h"
 #include "Matrix.h"
 
@@ -51,6 +53,46 @@ namespace LineM
 		result -= det2x2(mat[3], mat[5], mat[6], mat[8]) * mat[1]; //j
 		result += det2x2(mat[3], mat[4], mat[6], mat[7]) * mat[2]; //k
 		return result;
+	}
+
+	//Determinant of NxN matrix (array) using cofactor expansion
+	template<typename T>  T det(const size_t squareSize, const T* mat)
+	{
+		//Return the only value at one!
+		if (squareSize == 1) { return mat[0]; }
+
+		T determinant = 0;
+
+		const size_t matElementCount = squareSize * squareSize;
+		const size_t pieceSize = squareSize - 1;
+		
+		//Use top row
+		for (size_t co = 0; co < squareSize; co++)
+		{
+			std::vector<T> piece(pieceSize * pieceSize);
+
+			size_t mapFrom = squareSize;
+			size_t mapTo = 0;
+			for (; mapFrom < matElementCount; mapFrom++)
+			{
+				if ((mapFrom - co) % squareSize != 0)
+				{
+					piece[mapTo] = mat[mapFrom];
+					mapTo++;
+				}
+			}
+
+			if (co % 2 == 0) { determinant += mat[co] * det(pieceSize, piece.data()); }
+			else { determinant -= mat[co] * det(pieceSize, piece.data()); }
+		}
+
+		return determinant;
+	}
+
+	//Determinant of NxN matrix using cofactor expansion
+	template<typename T, size_t squareSize> T det(const Matrix<T, squareSize, squareSize>& mat)
+	{
+		return det(squareSize, mat.getData());
 	}
 
 	//Cross product of two vectors

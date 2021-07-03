@@ -65,6 +65,7 @@ template<typename T, size_t Size> class Vector
 		return Vector<T, Size + 1>(newAr);
 	}
 
+	size_t getSize() const { return ar.size(); }
 	T const* getData() const { return ar.data(); }
 	T* getData() { return ar.data(); }
 

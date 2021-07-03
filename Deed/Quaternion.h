@@ -13,8 +13,23 @@ template<typename T> class Quaternion
 	Quaternion(const Vector<T, 4> newData) : data(newData) {  }
 	Quaternion(T angle, Vector<T, 3> axis)
 	{
+		angle /= 2;
 		axis = axis * sin(angle);
 		data = makeVector<T>(cos(angle), axis[0], axis[1], axis[2]);
+	}
+
+	static Quaternion fromEuler(Vector<T, 3> eulers)
+	{
+		Quaternion returning;
+
+		eulers /= 2;
+		Vector<T, 3> sins = makeVector<T>(sin(eulers[0]), sin(eulers[1]), sin(eulers[0]));
+		Vector<T, 3> cose = makeVector<T>(cos(eulers[0]), cos(eulers[1]), cos(eulers[0]));
+
+		returning.w() = sins[0] * sins[1] * sins[2] + cose[0] * cose[1] * cose[2];
+		returning.x() = cose[0] * sins[1] * sins[2] - sins[0] * cose[1] * cose[2];
+		returning.y() = sins[0] * cose[1] * sins[2] + cose[0] * sins[1] * cose[2];
+		returning.z() = sins[0] * sins[1] * cose[2] - cose[0] * cose[1] * sins[2];
 	}
 
 	Quaternion operator*(const Quaternion second) const
