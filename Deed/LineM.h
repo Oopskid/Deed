@@ -95,6 +95,46 @@ namespace LineM
 		return det(squareSize, mat.getData());
 	}
 
+	template<typename T, size_t squareSize> Matrix<T, squareSize, squareSize> adjugate(const Matrix<T, squareSize, squareSize>& mat)
+	{
+		Matrix<T, squareSize, squareSize> adjRet;
+
+		const size_t pieceSize = squareSize - 1;
+		for (size_t i = 0; i < mat.asVector().getSize(); i++)
+		{
+			//Better unpacking than multiple loops
+			size_t x = i % squareSize;
+			size_t y = i / squareSize;
+
+			size_t adjTo = 0;
+			T piece[pieceSize * pieceSize];
+			for (size_t matFrom = 0; matFrom < mat.asVector().getSize(); matFrom++)
+			{
+				size_t fromX = matFrom % squareSize;
+				size_t fromY = matFrom / squareSize;
+
+				//If same row then skip entire row
+				if (fromY == y) { matFrom += pieceSize; continue; }
+				//If same column then skip
+				if (fromX == x) { continue; }
+
+				piece[adjTo] = mat[matFrom];
+				adjTo++;
+			}
+
+			//Transpose
+			if (i % 2 == 0) { adjRet.get(x, y) = det(pieceSize, piece); }
+			else { adjRet.get(x, y) = -det(pieceSize, piece); }
+		}
+
+		return adjRet;
+	}
+
+	template<typename T, size_t squareSize> Matrix<T, squareSize, squareSize> inverse(const Matrix<T, squareSize, squareSize>& mat)
+	{
+		return adjugate(mat) / det(mat);
+	}
+
 	//Cross product of two vectors
 	template<typename T> Vector<T, 3> cross(const Vector<T, 3>& first, const Vector<T, 3>& second)
 	{
