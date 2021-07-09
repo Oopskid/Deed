@@ -7,7 +7,7 @@ namespace Solve
 {
 	template<typename T> T determinant(const T a, const T b, const T c) { return b * b - 4 * a * c; }
 
-	template<typename T> std::vector<double> quadratic(const T a, const T b, const T c)
+	template<typename T> std::vector<double> quadratic(T a, const T b, const T c)
 	{
 		T det = determinant(a, b, c);
 

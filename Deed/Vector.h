@@ -65,6 +65,14 @@ template<typename T, size_t Size> class Vector
 		return Vector<T, Size + 1>(newAr);
 	}
 
+	Vector<T, Size - 1> fromHomogeneous() const
+	{
+		std::array<T, Size - 1> newAr;
+		T divisor = ar[newAr.size()];
+		for (size_t i = 0; i < newAr.size(); i++) { newAr[i] = ar[i] / divisor; } //Copy and apply scale
+		return Vector<T, newAr.size()>(newAr);
+	}
+
 	size_t getSize() const { return ar.size(); }
 	T const* getData() const { return ar.data(); }
 	T* getData() { return ar.data(); }
@@ -108,3 +116,11 @@ template<typename T> Vector<T, 1> makeVector(const T x) { return Vector<T, 1>(st
 template<typename T> Vector<T, 2> makeVector(const T x, const T y) { return Vector<T, 2>(std::array<T, 2> { x, y }); }
 template<typename T> Vector<T, 3> makeVector(const T x, const T y, const T z) { return Vector<T, 3>(std::array<T, 3> { x, y, z }); }
 template<typename T> Vector<T, 4> makeVector(const T x, const T y, const T z, const T w) { return Vector<T, 4>(std::array<T, 4> { x, y, z, w }); }
+
+//Change underlying vector type
+template<typename T, typename S, size_t Size> Vector<T, Size> cast(const Vector<S, Size>& from)
+{
+	Vector<T, Size> returning;
+	for (size_t i = 0; i < Size; i++) { returning[i] = (T)from[i]; }
+	return returning;
+}

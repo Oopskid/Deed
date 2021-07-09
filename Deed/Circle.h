@@ -8,27 +8,27 @@ template<typename T, size_t Dims> class Circle :
 public Traceable<T, Dims>
 {
 	typedef Vector<T, Dims> Vector;
-	typedef Ray<T, Dims> Ray;
 
 	public:
-	Sphere() { pos = Vector(); rad = T(); }
-	Sphere(const Vector position, const T radius) { pos = position; rad = radius; }
+	Circle() { pos = Vector(); rad = T(); }
+	Circle(const Vector position, const T radius) { pos = position; rad = radius; }
 
-	Traceable const* rayTrace(Ray& const ray, double& t) override
+	Traceable<T, Dims> const* rayTrace(Ray<T, Dims>& const ray, T& t) override
 	{
 		Vector disp = pos - ray.getStart();
-		
+
 		//Quadratic coefficients
-		T aQ = ray.direction.squareMag();
-		T bQ = disp.dot(ray.direction) * 2;
+		T aQ = ray.getDirection().squareMag();
+		T bQ = disp.dot(ray.getDirection()) * 2;
 		T cQ = disp.squareMag() - rad * rad;
 
 		std::vector<double> solution = Solve::quadratic(aQ, bQ, cQ);
-		if (solution.empty()) { return -1; } else { return solution[0]; }
+		if (solution.empty()) { t = -1; return nullptr; }
+		else { t = solution[1]; }
 		return this;
 	}
 
-	Vector tracedNorm(Ray& const ray, const Vector hitPoint) const override
+	Vector tracedNorm(Ray<T, Dims>& const ray, const Vector hitPoint) const override
 	{
 		return hitPoint - pos;
 	}
@@ -43,7 +43,7 @@ public Traceable<T, Dims>
 	}
 
 	Vector getPosition() const { return pos; }
-	Vector setPosition(const Vector newPosition) { pos = newPosition; }
+	void setPosition(const Vector newPosition) { pos = newPosition; }
 	T getRadius() const { return rad; }
 	void setRadius(const T newRadius) { rad = newRadius; }
 

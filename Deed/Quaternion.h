@@ -42,6 +42,37 @@ template<typename T> class Quaternion
 			})));
 	}
 
+	Vector<T, 3> operator*(const Vector<T, 3> vec)
+	{
+		return LineM::multiply(getTransform(), vec.getHomogeneous(1)).fromHomogeneous();
+	}
+
+	Vector<T, 4> operator*(const Vector<T, 4> vec)
+	{
+		return LineM::multiply(getTransform(), vec);
+	}
+
+	void reverse()
+	{
+		x() = -x();
+		y() = -y();
+		z() = -z();
+	}
+
+	Quaternion reversed() const
+	{
+		Quaternion returning = *this;
+		returning.reverse();
+		return returning;
+	}
+
+	inline Quaternion asConjugate() const { return reversed(); }
+
+	static Quaternion displacement(Quaternion from, Quaternion to)
+	{
+		return to * from.reversed();
+	}
+
 	Matrix getTransform()
 	{
 		return LineM::multiply(Matrix({ 

@@ -123,7 +123,7 @@ namespace LineM
 			}
 
 			//Transpose
-			if (i % 2 == 0) { adjRet.get(x, y) = det(pieceSize, piece); }
+			if ((x + y) % 2 == 0) { adjRet.get(x, y) = det(pieceSize, piece); }
 			else { adjRet.get(x, y) = -det(pieceSize, piece); }
 		}
 
