@@ -15,7 +15,7 @@ public Traceable<T, Dims>
 
 	Traceable<T, Dims> const* rayTrace(Ray<T, Dims>& const ray, T& t) override
 	{
-		Vector disp = pos - ray.getStart();
+		Vector disp = ray.getStart() - pos;
 
 		//Quadratic coefficients
 		T aQ = ray.getDirection().squareMag();
