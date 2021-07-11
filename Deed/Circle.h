@@ -24,13 +24,19 @@ public Traceable<T, Dims>
 
 		std::vector<double> solution = Solve::quadratic(aQ, bQ, cQ);
 		if (solution.empty()) { t = -1; return nullptr; }
-		else { t = solution[1]; }
+		else { t = solution[0]; }
 		return this;
 	}
 
 	Vector tracedNorm(Ray<T, Dims>& const ray, const Vector hitPoint) const override
 	{
 		return hitPoint - pos;
+	}
+
+	//Returns whether a sphere contains a point
+	static bool contains(Circle* const first, const Vector second)
+	{
+		return (second - first->pos).squareMag() <= first->rad * first->rad; //Is square distance smaller than radii?
 	}
 
 	//Returns whether two spheres overlap

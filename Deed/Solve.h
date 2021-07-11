@@ -14,6 +14,7 @@ namespace Solve
 		if (det < 0) { return std::vector<double>(); } //No real roots
 		if (a == 0) { return { -c/b }; } //Linear
 
+		det = sqrt(det);
 		a *= 2; //Slight optimisation for 2a
 		return { -(b + det) / a, (det - b) / a };
 	}
