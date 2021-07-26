@@ -53,7 +53,7 @@ public Traceable<T, Dims>
 	T getRadius() const { return rad; }
 	void setRadius(const T newRadius) { rad = newRadius; }
 
-	private:
+	protected:
 	Vector pos;
 	T rad;
 };
