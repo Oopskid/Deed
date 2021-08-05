@@ -22,7 +22,7 @@ template<typename T> class Quaternion
 	{
 		Quaternion returning;
 
-		eulers /= 2;
+		eulers = eulers / 2;
 		Vector<T, 3> sins = makeVector<T>(sin(eulers[0]), sin(eulers[1]), sin(eulers[0]));
 		Vector<T, 3> cose = makeVector<T>(cos(eulers[0]), cos(eulers[1]), cos(eulers[0]));
 
@@ -30,6 +30,13 @@ template<typename T> class Quaternion
 		returning.x() = cose[0] * sins[1] * sins[2] - sins[0] * cose[1] * cose[2];
 		returning.y() = sins[0] * cose[1] * sins[2] + cose[0] * sins[1] * cose[2];
 		returning.z() = sins[0] * sins[1] * cose[2] - cose[0] * cose[1] * sins[2];
+
+		return returning;
+	}
+
+	Quaternion operator+(const Quaternion second) const
+	{
+		return Quaternion(makeVector(x() + second.x(), y() + second.y(), z() + second.z(), w() + second.w()));
 	}
 
 	Quaternion operator*(const Quaternion second) const

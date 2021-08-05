@@ -1,19 +1,21 @@
 #pragma once
 
+#include "Circle.h"
 #include "Kinetic.h"
 
-#include "Circle.h"
 template<typename T, size_t Dims> class Ball :
 public Circle<T, Dims>, public Kinetic<T>
 {
+	typedef Vector<T, Dims> Vector;
+
 	public:
-	Ball() : Circle() { vel = Vector(); }
-	Ball(const Vector position, const T radius) : Circle(position, radius) { vel = Vector(); }
-	Ball(const Vector position, const Vector velocity, const T radius) : Circle(position, radius) { vel = velocity; }
+	Ball() : Circle<T, Dims>() { vel = Vector(); }
+	Ball(const Vector position, const T radius) : Circle<T, Dims>(position, radius) { vel = Vector(); }
+	Ball(const Vector position, const Vector velocity, const T radius) : Circle<T, Dims>(position, radius) { vel = velocity; }
 
 	void motion(T timelapse) override
 	{
-		pos += vel * timelapse;
+		Circle<T, Dims>::pos = Circle<T, Dims>::pos + vel * timelapse;
 	}
 
 	static bool collision(T& result, Ball* first, Ball* second)

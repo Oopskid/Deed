@@ -75,6 +75,7 @@ namespace Collision
 				events.erase(it);
 			}
 
+			step(time);
 		}
 
 		void add(Obj* collidable)
@@ -177,7 +178,7 @@ namespace Collision
 		{
 			for (auto i : collidables)
 			{
-				reinterpret_cast<Kinetic<T>*>(i)->motion(timePassed);
+				i->motion(timePassed);
 			}
 		}
 
