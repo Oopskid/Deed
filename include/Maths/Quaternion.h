@@ -1,7 +1,7 @@
 #pragma once
 
 #include "Matrix.h"
-#include "LineM.h"
+#include "Functions/LineM.h"
 
 //Quaternion of s, xi, yj, zk
 template<typename T> class Quaternion

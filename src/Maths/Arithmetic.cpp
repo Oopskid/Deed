@@ -1,6 +1,6 @@
 #include "pch.h"
 
-#include "Arithmetic.h"
+#include "Maths/Arithmetic.h"
 
 Arithmetic::Arithmetic()
 {

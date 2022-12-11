@@ -4,8 +4,8 @@
 #include <map>
 #include <type_traits>
 
-#include "Solve.h"
-#include "Kinetic.h"
+#include "Maths/Functions/Solve.h"
+#include "Physics/Kinetic.h"
 #include "CPair.h"
 
 namespace Collision

@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Vector.h"
+#include "Maths/Vector.h"
 
 template<typename T, size_t Dims> class Ray
 {

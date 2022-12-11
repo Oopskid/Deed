@@ -1,7 +1,7 @@
 #pragma once
 
-#include "Traceable.h"
-#include "Vector.h"
+#include "Physics/Traceable.h"
+#include "Maths/Vector.h"
 
 //Bounding sphere
 template<typename T, size_t Dims> class Circle :

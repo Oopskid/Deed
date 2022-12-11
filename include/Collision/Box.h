@@ -1,7 +1,7 @@
 #pragma once
 
 #include "AABB.h"
-#include "Kinetic.h"
+#include "Physics/Kinetic.h"
 
 template<typename T, size_t Dims> class Box :
 public AABB<T, Dims>, public Kinetic<T>

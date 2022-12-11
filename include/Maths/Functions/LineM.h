@@ -2,8 +2,8 @@
 
 #include <vector>
 
-#include "Vector.h"
-#include "Matrix.h"
+#include "Maths/Vector.h"
+#include "Maths/Matrix.h"
 
 //Linear algebra
 namespace LineM

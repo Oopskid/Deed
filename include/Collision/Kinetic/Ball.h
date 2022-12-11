@@ -1,7 +1,7 @@
 #pragma once
 
-#include "Circle.h"
-#include "Kinetic.h"
+#include "Collision/Circle.h"
+#include "Physics/Kinetic.h"
 
 template<typename T, size_t Dims> class Ball :
 public Circle<T, Dims>, public Kinetic<T>

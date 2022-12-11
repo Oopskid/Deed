@@ -1,7 +1,7 @@
 #pragma once
 
 #include "Ray.h"
-#include "Solve.h"
+#include "Maths/Functions/Solve.h"
 
 //Interface to handle raytracing
 template<typename T, size_t Dims> class Traceable
