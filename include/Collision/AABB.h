@@ -10,7 +10,7 @@ template<typename T, size_t Dims> class AABB
 
 	public:
 	AABB() {  }
-	AABB(const Vector position, const Vector size) { pos = position; range = size; }
+	AABB(const Vector& position, const Vector& size) { pos = position; range = size; }
 
 	//Returns whether two AABB overlap
 	static bool overlaps(AABB* const first, AABB* const second)
