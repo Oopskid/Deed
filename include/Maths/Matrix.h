@@ -8,7 +8,7 @@
 template<typename T, size_t nRows, size_t nColumns> class Matrix
 {
 	//Vector that is being used
-	typedef Vector<T, nRows* nColumns> baseV;
+	typedef Vector<T, nRows * nColumns> baseV;
 
 	public:
 	//Declaration of a matrix without values set
@@ -16,9 +16,9 @@ template<typename T, size_t nRows, size_t nColumns> class Matrix
 	//Initialise a matrix with a single value
 	Matrix(const T initialiser) { elements = baseV(initialiser); }
 	//Initialise the matrix with a vector
-	Matrix(const Vector<T, nRows* nColumns> vec) : elements(vec) {  }
+	Matrix(const Vector<T, nRows* nColumns>& vec) : elements(vec) {  }
 	//Initialise the matrix with an array
-	Matrix(const std::array<T, nRows* nColumns>& args) { elements = baseV(args); }
+	Matrix(const std::array<T, nRows * nColumns>& args) { elements = baseV(args); }
 
 	T& operator[](size_t linearI)
 	{

@@ -8,20 +8,19 @@ template<typename T, size_t Size> class Vector
 	public:
 	//Declaration of a vector without values set
 	Vector() : ar() {}
+	Vector(const Vector<T, Size>& other) { ar = other.ar; }
 	//Initialise a vector with a single value
 	Vector(const T initialiser) { ar.fill(initialiser); }
 	//Initialise a vector with an array
-	Vector(std::array<T, Size>& const args) : ar(args) {}
+	Vector(const std::array<T, Size>& args) : ar(args) {}
 
 	T& operator[](size_t index) 
 	{
-		static_assert(index < Size);
 		return ar[index];
 	}
 
 	const T& operator[](size_t index) const
 	{
-		static_assert(index < Size);
 		return ar[index];
 	}
 
