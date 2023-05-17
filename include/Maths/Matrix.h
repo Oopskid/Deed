@@ -3,7 +3,7 @@
 #include "Vector.h"
 
 //A matrix in the mathematical sense
-//Stored and used as a vector to utilise cache of concurrent memory (1d array)
+//Stored and used as a vector to utilise cache of contiguous memory (1d array)
 //Size must be >= 1 else undefined behaviour
 template<typename T, size_t nRows, size_t nColumns> class Matrix
 {
@@ -83,3 +83,11 @@ template<typename T, size_t nRows, size_t nColumns> class Matrix
 	private:
 	baseV elements;
 };
+
+//Common matrix types
+#define DefSquareMatrix(N) typedef Matrix<int, N, N> Matrix##N##i; typedef Matrix<float, N, N> Matrix##N##f; typedef Matrix<double, N, N> Matrix##N##d;
+DefSquareMatrix(1)
+DefSquareMatrix(2)
+DefSquareMatrix(3)
+DefSquareMatrix(4)
+#undef DefSquareMatrix
