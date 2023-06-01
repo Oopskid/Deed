@@ -95,19 +95,19 @@ template<typename T> class Quaternion
 	}
 
 	//Returns the forward vector (z/k) under this transformation assuming unit quaternion
-	Vector<T, 3> getForward()
+	Vector<T, 3> getForward() const
 	{
 		return makeVector(2 * (x() * z() + w() * y()), 2 * (y() * z() - w() * x()), w() * w() + z() * z() - x() * x() - y() * y());
 	}
 
 	//Returns the right vector (x/i) under this transformation assuming unit quaternion
-	Vector<T, 3> getRight()
+	Vector<T, 3> getRight() const
 	{
 		return makeVector(w() * w() + x() * x() - y() * y() - z() * z(), 2 * (x() * y() + w() * z()), 2 * (x() * z() - w() * y()));
 	}
 
 	//Returns the up vector (y/j) under this transformation assuming unit quaternion
-	Vector<T, 3> getUp()
+	Vector<T, 3> getUp() const
 	{
 		return makeVector(2 * (x() * y() - w() * z()), w() * w() + y() * y() - x() * x() - z() * z(), 2 * (y() * z() + w() * x()));
 	}
