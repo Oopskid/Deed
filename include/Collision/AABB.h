@@ -13,12 +13,23 @@ template<typename T, size_t Dims> class AABB
 	AABB(const Vector& position, const Vector& size) { pos = position; range = size; }
 
 	//Returns whether two AABB overlap
-	static bool overlaps(AABB* const first, AABB* const second)
+	static bool overlaps(const AABB* first, const AABB* second)
 	{
 		//Check each dimension
 		for (size_t i = 0; i < Dims; i++)
 		{
-			if (!overlaps(std::make_pair(first->pos[i], first->pos[i] + first->range[i]), std::make_pair(second->pos, second->pos + second->range))) { return false; } //Return prematurely
+			if (!Bounds::overlaps(std::make_pair(first->pos[i], first->pos[i] + first->range[i]), std::make_pair(second->pos[i], second->pos[i] + second->range[i]))) { return false; } //Return prematurely
+		}
+		return true;
+	}
+
+	//Returns if this AABB contains a smaller one
+  bool contains(const AABB* child) const
+	{
+		//Check each dimension
+		for (size_t i = 0; i < Dims; i++)
+		{
+			if (!Bounds::contains(std::make_pair(pos[i], pos[i] + range[i]), std::make_pair(child->pos[i], child->pos[i] + child->range[i]))) { return false; } //Return prematurely
 		}
 		return true;
 	}

@@ -34,6 +34,12 @@ namespace Bounds
 		return firstR.second >= secondR.first && secondR.second >= firstR.first;
 	}
 
+	//Returns whether a smaller range is contained within a larger one. First is min, second is max
+	template<typename T> inline bool contains(const std::pair<T, T> largeR, const std::pair<T, T> smallR)
+	{
+		return largeR.first < smallR.first && largeR.second > smallR.second;
+	}
+
 	//Returns the minimum range which includes two ranges
 	template<typename T> std::pair<T, T> include(const std::pair<T, T> firstR, const std::pair<T, T> secondR)
 	{
