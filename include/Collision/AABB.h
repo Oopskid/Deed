@@ -86,9 +86,9 @@ template<typename T, size_t Dims> class AABB
 		pos += amount;
 	}
 
-	Vector getPosition() const { return pos; }
+	const Vector& getPosition() const { return pos; }
 	Vector setPosition(const Vector newPosition) { pos = newPosition; }
-	Vector getSize() const { return range; }
+	const Vector& getSize() const { return range; }
 	void setSize(const Vector newSize) { range = newSize; }
 
 	private:
